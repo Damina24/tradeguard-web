@@ -1,0 +1,20 @@
+@"
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>TradeGuard - Redirecting</title>
+  <script>
+    (function() {
+      var path = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
+      window.location.replace('index.html' + search + hash + '#' + path + search);
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
+"@ | Set-Content -Path 'web\404.html' -Encoding UTF8
