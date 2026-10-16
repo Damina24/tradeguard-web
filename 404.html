@@ -4,11 +4,18 @@
   <meta charset="UTF-8">
   <title>TradeGuard - Redirecting</title>
   <script>
+    // GitHub Pages has no server-side rewrites: any URL that is not a real
+    // file404s and this page is served in its place (GitHub Pages serves a
+    // root404.html as the custom error page). The app is hash-routed, so the
+    // path part of the URL is meaningless to GoRouter — drop it and preserve
+    // only the query string (Supabase's PKCE `?code=`) and the hash, then
+    // let the app's own boot logic route. Injecting the path into the hash
+    // (the previous behaviour) corrupted Supabase's params and bounced
+    // password-reset links to the home page.
     (function() {
-      var path = window.location.pathname;
-      var search = window.location.search;
-      var hash = window.location.hash;
-      window.location.replace('index.html' + search + hash + '#' + path + search);
+      window.location.replace(
+        'index.html' + window.location.search + window.location.hash
+      );
     })();
   </script>
 </head>
